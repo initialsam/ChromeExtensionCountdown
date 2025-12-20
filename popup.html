@@ -1,156 +1,199 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>倒數計時</title>
-  <style>
-    body {
-      width: 300px;
-      padding: 20px;
-      font-family: "Microsoft JhengHei", Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-    h2 {
-      text-align: center;
-      margin-top: 0;
-      font-size: 24px;
-    }
-    .time-section {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-    .section-title {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .button-group {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .time-btn {
-      flex: 1;
-      min-width: 60px;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 8px;
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .time-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
-      border-color: rgba(255, 255, 255, 0.5);
-      transform: translateY(-2px);
-    }
-    .time-btn:active {
-      transform: translateY(0);
-    }
-    .display {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      margin-bottom: 15px;
-      font-size: 36px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-    .control-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    .control-btn {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .start-btn {
-      background: #4ade80;
-      color: white;
-    }
-    .start-btn:hover {
-      background: #22c55e;
-    }
-    .reset-btn {
-      background: #f87171;
-      color: white;
-    }
-    .reset-btn:hover {
-      background: #ef4444;
-    }
-    .status {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 14px;
-      height: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h2>⏰ 倒數計時</h2>
-  
-  <div class="display" id="display">00:00</div>
-  
-  <div class="time-section">
-    <div class="section-title">分鐘</div>
-    <div class="button-group">
-      <button class="time-btn" data-type="minutes" data-value="1">+1分</button>
-      <button class="time-btn" data-type="minutes" data-value="5">+5分</button>
-      <button class="time-btn" data-type="minutes" data-value="10">+10分</button>
-      <button class="time-btn" data-type="minutes" data-value="30">+30分</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>倒數計時</title>
+    <style>
+      body {
+        width: 300px;
+        padding: 15px;
+        font-family: "Microsoft JhengHei", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        margin: 0;
+      }
+      h2 {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 12px;
+        font-size: 20px;
+      }
+      .time-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+      .section-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      .button-group {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .time-btn {
+        flex: 1;
+        min-width: 60px;
+        padding: 8px 6px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 6px;
+        color: white;
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .time-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+      }
+      .time-btn:active {
+        transform: translateY(0);
+      }
+      .display {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        padding: 12px;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+      .control-buttons {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .control-btn {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .start-btn {
+        background: #4ade80;
+        color: white;
+      }
+      .start-btn:hover {
+        background: #22c55e;
+      }
+      .reset-btn {
+        background: #f87171;
+        color: white;
+      }
+      .reset-btn:hover {
+        background: #ef4444;
+      }
+      .status {
+        text-align: center;
+        margin-top: 8px;
+        font-size: 12px;
+        height: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>⌛ 倒數計時</h2>
+
+    <div class="display" id="display">00:00</div>
+
+    <div class="time-section">
+      <div class="section-title">分鐘</div>
+      <div class="button-group">
+        <button class="time-btn" data-type="minutes" data-value="1">
+          +1分
+        </button>
+        <button class="time-btn" data-type="minutes" data-value="5">
+          +5分
+        </button>
+        <button class="time-btn" data-type="minutes" data-value="10">
+          +10分
+        </button>
+        <button class="time-btn" data-type="minutes" data-value="30">
+          +30分
+        </button>
+      </div>
     </div>
-  </div>
-  
-  <div class="time-section">
-    <div class="section-title">秒數</div>
-    <div class="button-group">
-      <button class="time-btn" data-type="seconds" data-value="1">+1秒</button>
-      <button class="time-btn" data-type="seconds" data-value="5">+5秒</button>
-      <button class="time-btn" data-type="seconds" data-value="10">+10秒</button>
-      <button class="time-btn" data-type="seconds" data-value="30">+30秒</button>
+
+    <div class="time-section">
+      <div class="section-title">秒數</div>
+      <div class="button-group">
+        <button class="time-btn" data-type="seconds" data-value="1">
+          +1秒
+        </button>
+        <button class="time-btn" data-type="seconds" data-value="5">
+          +5秒
+        </button>
+        <button class="time-btn" data-type="seconds" data-value="10">
+          +10秒
+        </button>
+        <button class="time-btn" data-type="seconds" data-value="30">
+          +30秒
+        </button>
+      </div>
     </div>
-  </div>
-  
-  <div class="time-section">
-    <div class="section-title">顯示設定</div>
-    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
-      <input type="checkbox" id="showTimeCheckbox" checked style="width: 20px; height: 20px; cursor: pointer;">
-      <span style="font-size: 14px;">顯示倒數時間</span>
-    </label>
-    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-      <input type="checkbox" id="showBadgeCheckbox" checked style="width: 20px; height: 20px; cursor: pointer;">
-      <span style="font-size: 14px;">在擴展圖標顯示倒數（分鐘）</span>
-    </label>
-  </div>
-  
-  <div class="time-section">
-    <div class="section-title">網站自動計時</div>
-    <button class="control-btn" id="siteRulesBtn" style="width: 100%; background: #8b5cf6; color: white; margin-bottom: 0;">
-      管理網站規則
-    </button>
-  </div>
-  
-  <div class="control-buttons">
-    <button class="control-btn start-btn" id="startBtn">開始</button>
-    <button class="control-btn reset-btn" id="resetBtn">清除</button>
-  </div>
-  
-  <div class="status" id="status"></div>
-  
-  <script src="popup.js"></script>
-</body>
+
+    <div class="time-section">
+      <div class="section-title">顯示設定</div>
+      <label
+        style="
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          margin-bottom: 8px;
+        "
+      >
+        <input
+          type="checkbox"
+          id="showTimeCheckbox"
+          checked
+          style="width: 18px; height: 18px; cursor: pointer"
+        />
+        <span style="font-size: 13px">顯示倒數時間</span>
+      </label>
+      <label
+        style="display: flex; align-items: center; gap: 8px; cursor: pointer"
+      >
+        <input
+          type="checkbox"
+          id="showBadgeCheckbox"
+          checked
+          style="width: 18px; height: 18px; cursor: pointer"
+        />
+        <span style="font-size: 13px">在擴展圖標顯示倒數（分鐘）</span>
+      </label>
+    </div>
+
+    <div class="time-section">
+      <div class="section-title">網站自動計時</div>
+      <button
+        class="control-btn"
+        id="siteRulesBtn"
+        style="width: 100%; background: #8b5cf6; color: white; padding: 8px"
+      >
+        管理網站規則
+      </button>
+    </div>
+
+    <div class="control-buttons">
+      <button class="control-btn start-btn" id="startBtn">開始</button>
+      <button class="control-btn reset-btn" id="resetBtn">清除</button>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <script src="popup.js"></script>
+  </body>
 </html>
