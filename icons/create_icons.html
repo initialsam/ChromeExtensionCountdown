@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Icons</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        function createIcon(size) {
+            const canvas = document.getElementById('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // 紫色背景圓圈
+            ctx.fillStyle = '#677EEA';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 繪製沙漏 emoji
+            ctx.font = `${size * 0.7}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('⌛', size/2, size/2);
+            
+            // 下載圖片
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `icon${size}.png`;
+                a.click();
+            });
+        }
+        
+        // 創建三個尺寸
+        setTimeout(() => createIcon(16), 100);
+        setTimeout(() => createIcon(48), 500);
+        setTimeout(() => createIcon(128), 1000);
+    </script>
+</body>
+</html>

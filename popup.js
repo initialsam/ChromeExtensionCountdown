@@ -5,15 +5,20 @@ const startBtn = document.getElementById('startBtn');
 const resetBtn = document.getElementById('resetBtn');
 const status = document.getElementById('status');
 const showTimeCheckbox = document.getElementById('showTimeCheckbox');
+const showBadgeCheckbox = document.getElementById('showBadgeCheckbox');
+const siteRulesBtn = document.getElementById('siteRulesBtn');
 
 // 載入上次設定的時間和顯示設定
-chrome.storage.local.get(['lastSetTime', 'showTime'], (result) => {
+chrome.storage.local.get(['lastSetTime', 'showTime', 'showBadge'], (result) => {
   if (result.lastSetTime) {
     totalSeconds = result.lastSetTime;
     updateDisplay();
   }
   if (result.showTime !== undefined) {
     showTimeCheckbox.checked = result.showTime;
+  }
+  if (result.showBadge !== undefined) {
+    showBadgeCheckbox.checked = result.showBadge;
   }
 });
 
@@ -59,7 +64,19 @@ startBtn.addEventListener('click', () => {
   
   // 儲存設定時間和顯示設定
   const showTime = showTimeCheckbox.checked;
-  chrome.storage.local.set({ lastSetTime: totalSeconds, showTime: showTime });
+  const showBadge = showBadgeCheckbox.checked;
+  chrome.storage.local.set({ lastSetTime: totalSeconds, showTime: showTime, showBadge: showBadge });
+  
+  // 發送訊息給 background 開始倒數
+  chrome.runtime.sendMessage({
+    action: 'startBadgeTimer',
+    seconds: totalSeconds,
+    showBadge: showBadge
+  }, (response) => {
+    if (chrome.runtime.lastError) {
+      console.log('Background script error:', chrome.runtime.lastError.message);
+    }
+  });
   
   // 發送訊息給 content script 開始計時
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -68,6 +85,11 @@ startBtn.addEventListener('click', () => {
         action: 'startTimer',
         seconds: totalSeconds,
         showTime: showTime
+      }, (response) => {
+        // 忽略錯誤（例如在不支援 content script 的頁面）
+        if (chrome.runtime.lastError) {
+          console.log('Content script not available:', chrome.runtime.lastError.message);
+        }
       });
       
       status.textContent = '計時已開始！';
@@ -89,4 +111,9 @@ resetBtn.addEventListener('click', () => {
   setTimeout(() => {
     status.textContent = '';
   }, 1500);
+});
+
+// 網站規則按鈕
+siteRulesBtn.addEventListener('click', () => {
+  chrome.tabs.create({ url: 'site-rules.html' });
 });

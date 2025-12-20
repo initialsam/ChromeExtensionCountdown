@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>網站自動計時規則</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Microsoft JhengHei", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .add-section {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+      font-size: 14px;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+    input[type="text"]:focus, input[type="number"]:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    .time-inputs {
+      display: flex;
+      gap: 15px;
+    }
+    .time-inputs .form-group {
+      flex: 1;
+    }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-primary {
+      background: #667eea;
+      color: white;
+      width: 100%;
+    }
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    .btn-delete {
+      background: #ef4444;
+      color: white;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    .btn-delete:hover {
+      background: #dc2626;
+    }
+    .rules-list {
+      margin-top: 20px;
+    }
+    .rule-item {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+    .rule-item:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+    }
+    .rule-info {
+      flex: 1;
+    }
+    .rule-url {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+      word-break: break-all;
+    }
+    .rule-time {
+      font-size: 14px;
+      color: #667eea;
+      font-weight: bold;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    .help-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⏰ 網站自動計時規則</h1>
+    <p class="subtitle">設定特定網站自動開始倒數計時</p>
+    
+    <div class="add-section">
+      <div class="form-group">
+        <label for="urlPattern">網站網址（支援萬用字元 *）</label>
+        <input type="text" id="urlPattern" placeholder="例如：*facebook.com* 或 *youtube.com*">
+        <p class="help-text">使用 * 代表任意字元，例如：*facebook.com* 會匹配所有 Facebook 頁面</p>
+      </div>
+      
+      <div class="time-inputs">
+        <div class="form-group">
+          <label for="minutes">分鐘</label>
+          <input type="number" id="minutes" min="0" value="10">
+        </div>
+        <div class="form-group">
+          <label for="seconds">秒數</label>
+          <input type="number" id="seconds" min="0" max="59" value="0">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="showTimeCheckbox" checked style="width: 20px; height: 20px; cursor: pointer;">
+          <span style="font-size: 14px; font-weight: normal;">顯示倒數時間（取消勾選只顯示訊號燈）</span>
+        </label>
+      </div>
+      
+      <button class="btn btn-primary" id="addRuleBtn">➕ 新增規則</button>
+    </div>
+    
+    <h2 style="margin-bottom: 15px; font-size: 20px; color: #333;">已設定的規則</h2>
+    <div class="rules-list" id="rulesList">
+      <div class="empty-state">
+        <div class="empty-state-icon">📝</div>
+        <p>尚未設定任何規則</p>
+        <p style="margin-top: 10px; font-size: 14px;">在上方新增您的第一條規則</p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="site-rules.js"></script>
+</body>
+</html>

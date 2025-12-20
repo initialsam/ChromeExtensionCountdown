@@ -13,6 +13,17 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   animation: slideIn 0.3s ease-out;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#countdown-timer-indicator:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+#countdown-timer-indicator:active {
+  transform: scale(0.98);
 }
 
 /* 只有訊號燈時的樣式 */

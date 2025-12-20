@@ -3,7 +3,7 @@
   "name": "倒數計時",
   "version": "1.0",
   "description": "可自訂時間的倒數計時器，附有視覺提醒功能",
-  "permissions": ["storage"],
+  "permissions": ["storage", "alarms"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -11,6 +11,9 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
+  },
+  "background": {
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
