@@ -6,12 +6,70 @@
     <title>倒數計時</title>
     <style>
       body {
-        width: 300px;
+        width: 320px;
         padding: 15px;
         font-family: "Microsoft JhengHei", Arial, sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         margin: 0;
+      }
+      .time-input-group {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        justify-content: center;
+      }
+      .time-input {
+        width: 48px;
+        height: 34px;
+        padding: 4px;
+        border-radius: 6px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      .time-input:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.6);
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+      }
+      .time-input:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      .time-separator {
+        font-size: 18px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0 2px;
+      }
+      .time-unit {
+        font-size: 13px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.8);
+        margin-left: 2px;
+      }
+      .threshold-input {
+        width: 40px;
+        height: 28px;
+        padding: 2px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      .threshold-input:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.6);
+        background: rgba(0, 0, 0, 0.3);
       }
       h2 {
         text-align: center;
@@ -106,41 +164,27 @@
   <body>
     <h2>⌛ 倒數計時</h2>
 
-    <div class="display" id="display">00:00</div>
-
     <div class="time-section">
-      <div class="section-title">分鐘</div>
-      <div class="button-group">
-        <button class="time-btn" data-type="minutes" data-value="1">
-          +1分
-        </button>
-        <button class="time-btn" data-type="minutes" data-value="5">
-          +5分
-        </button>
-        <button class="time-btn" data-type="minutes" data-value="10">
-          +10分
-        </button>
-        <button class="time-btn" data-type="minutes" data-value="30">
-          +30分
-        </button>
-      </div>
-    </div>
-
-    <div class="time-section">
-      <div class="section-title">秒數</div>
-      <div class="button-group">
-        <button class="time-btn" data-type="seconds" data-value="1">
-          +1秒
-        </button>
-        <button class="time-btn" data-type="seconds" data-value="5">
-          +5秒
-        </button>
-        <button class="time-btn" data-type="seconds" data-value="10">
-          +10秒
-        </button>
-        <button class="time-btn" data-type="seconds" data-value="30">
-          +30秒
-        </button>
+      <div class="time-input-group">
+        <input
+          type="number"
+          id="minutesInput"
+          class="time-input"
+          min="0"
+          value="0"
+          placeholder="0"
+        />
+        <div class="time-separator">:</div>
+        <input
+          type="number"
+          id="secondsInput"
+          class="time-input"
+          min="0"
+          max="59"
+          value="0"
+          placeholder="0"
+        />
+        <span class="time-unit">秒</span>
       </div>
     </div>
 
@@ -177,6 +221,88 @@
     </div>
 
     <div class="time-section">
+      <div class="section-title">燈號設定</div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+          "
+        >
+          <div style="font-weight: bold; font-size: 13px; width: 65px">
+            🟢 綠燈 >
+          </div>
+          <div class="time-input-group">
+            <input
+              type="number"
+              id="greenMinutes"
+              class="threshold-input"
+              min="0"
+              value="3"
+              placeholder="0"
+            />
+            <div class="time-separator">:</div>
+            <input
+              type="number"
+              id="greenSeconds"
+              class="threshold-input"
+              min="0"
+              max="59"
+              value="0"
+              placeholder="0"
+            />
+            <span class="time-unit">秒</span>
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+          "
+        >
+          <div style="font-weight: bold; font-size: 13px; width: 65px">
+            🔴 紅燈 ≤
+          </div>
+          <div class="time-input-group">
+            <input
+              type="number"
+              id="redMinutes"
+              class="threshold-input"
+              min="0"
+              value="0"
+              placeholder="0"
+            />
+            <div class="time-separator">:</div>
+            <input
+              type="number"
+              id="redSeconds"
+              class="threshold-input"
+              min="0"
+              max="59"
+              value="10"
+              placeholder="0"
+            />
+            <span class="time-unit">秒</span>
+          </div>
+        </div>
+        <div
+          style="
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            margin-top: 2px;
+          "
+        >
+          🟡 黃燈：介於紅燈與綠燈之間
+        </div>
+      </div>
+    </div>
+
+    <div class="time-section">
       <div class="section-title">網站自動計時</div>
       <button
         class="control-btn"
@@ -192,7 +318,7 @@
       <button class="control-btn reset-btn" id="resetBtn">清除</button>
     </div>
 
-    <div class="status" id="status"></div>
+    <div class="status" id="status">&nbsp;</div>
 
     <script src="popup.js"></script>
   </body>

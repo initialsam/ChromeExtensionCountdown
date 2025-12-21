@@ -1,6 +1,10 @@
 const urlPatternInput = document.getElementById('urlPattern');
 const minutesInput = document.getElementById('minutes');
 const secondsInput = document.getElementById('seconds');
+const greenMinutes = document.getElementById('greenMinutes');
+const greenSeconds = document.getElementById('greenSeconds');
+const redMinutes = document.getElementById('redMinutes');
+const redSeconds = document.getElementById('redSeconds');
 const showTimeCheckbox = document.getElementById('showTimeCheckbox');
 const addRuleBtn = document.getElementById('addRuleBtn');
 const rulesList = document.getElementById('rulesList');
@@ -35,11 +39,23 @@ function displayRules(rules) {
     
     const displayText = rule.showTime !== false ? '顯示時間' : '僅訊號燈';
     
+    // 處理燈號顯示
+    const greenThreshold = rule.greenThreshold !== undefined ? rule.greenThreshold : 180;
+    const redThreshold = rule.redThreshold !== undefined ? rule.redThreshold : 10;
+    const greenMin = Math.floor(greenThreshold / 60);
+    const greenSec = greenThreshold % 60;
+    const redMin = Math.floor(redThreshold / 60);
+    const redSec = redThreshold % 60;
+    
+    const greenText = greenMin > 0 ? `${greenMin}分${greenSec}秒` : `${greenSec}秒`;
+    const redText = redMin > 0 ? `${redMin}分${redSec}秒` : `${redSec}秒`;
+    
     return `
       <div class="rule-item">
         <div class="rule-info">
           <div class="rule-url">${escapeHtml(rule.urlPattern)}</div>
           <div class="rule-time">⏱️ ${timeText} | 📺 ${displayText}</div>
+          <div class="rule-time" style="font-size: 12px; margin-top: 2px">🟢 ${greenText} | 🔴 ${redText}</div>
         </div>
         <button class="btn btn-delete" data-index="${index}">刪除</button>
       </div>
@@ -62,6 +78,8 @@ addRuleBtn.addEventListener('click', () => {
   const seconds = parseInt(secondsInput.value) || 0;
   const totalSeconds = minutes * 60 + seconds;
   const showTime = showTimeCheckbox.checked;
+  const greenThreshold = (parseInt(greenMinutes.value) || 0) * 60 + (parseInt(greenSeconds.value) || 0);
+  const redThreshold = (parseInt(redMinutes.value) || 0) * 60 + (parseInt(redSeconds.value) || 0);
   
   if (!urlPattern) {
     alert('請輸入網站網址！');
@@ -90,7 +108,9 @@ addRuleBtn.addEventListener('click', () => {
     rules.push({
       urlPattern: urlPattern,
       seconds: totalSeconds,
-      showTime: showTime
+      showTime: showTime,
+      greenThreshold: greenThreshold,
+      redThreshold: redThreshold
     });
     
     chrome.storage.local.set({ siteRules: rules }, () => {
@@ -98,6 +118,10 @@ addRuleBtn.addEventListener('click', () => {
       urlPatternInput.value = '';
       minutesInput.value = '10';
       secondsInput.value = '0';
+      greenMinutes.value = '3';
+      greenSeconds.value = '0';
+      redMinutes.value = '0';
+      redSeconds.value = '10';
       showTimeCheckbox.checked = true;
       
       // 視覺回饋

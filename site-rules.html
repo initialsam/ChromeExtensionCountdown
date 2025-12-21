@@ -67,6 +67,62 @@
       outline: none;
       border-color: #667eea;
     }
+    .time-input-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .time-input-field {
+      width: 55px;
+      height: 38px;
+      padding: 6px;
+      border-radius: 6px;
+      border: 2px solid #e0e0e0;
+      background: white;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .time-input-field:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+    }
+    .time-input-field:hover {
+      border-color: #8b9bea;
+    }
+    .time-separator {
+      font-size: 18px;
+      font-weight: bold;
+      color: #999;
+      margin: 0 2px;
+    }
+    .time-unit {
+      font-size: 13px;
+      font-weight: bold;
+      color: #666;
+      margin-left: 2px;
+    }
+    .threshold-input-field {
+      width: 45px;
+      height: 32px;
+      padding: 4px;
+      border-radius: 6px;
+      border: 2px solid #e0e0e0;
+      background: white;
+      color: #333;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .threshold-input-field:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+    }
     .time-inputs {
       display: flex;
       gap: 15px;
@@ -164,15 +220,42 @@
         <p class="help-text">使用 * 代表任意字元，例如：*facebook.com* 會匹配所有 Facebook 頁面</p>
       </div>
       
-      <div class="time-inputs">
-        <div class="form-group">
-          <label for="minutes">分鐘</label>
-          <input type="number" id="minutes" min="0" value="10">
+      <div class="form-group">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;">⏱️ 倒數</div>
+          <div class="time-input-row">
+            <input type="number" id="minutes" class="time-input-field" min="0" value="10" placeholder="0">
+            <div class="time-separator">:</div>
+            <input type="number" id="seconds" class="time-input-field" min="0" max="59" value="0" placeholder="0">
+            <span class="time-unit">秒</span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="seconds">秒數</label>
-          <input type="number" id="seconds" min="0" max="59" value="0">
+      </div>
+      
+      <div class="form-group">
+        <label>燈號設定</label>
+        <div style="margin-bottom: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+            <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;">🟢 綠燈 ></div>
+            <div class="time-input-row">
+              <input type="number" id="greenMinutes" class="threshold-input-field" min="0" value="3" placeholder="0">
+              <div class="time-separator">:</div>
+              <input type="number" id="greenSeconds" class="threshold-input-field" min="0" max="59" value="0" placeholder="0">
+              <span class="time-unit">秒</span>
+            </div>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;">🔴 紅燈 ≤</div>
+            <div class="time-input-row">
+              <input type="number" id="redMinutes" class="threshold-input-field" min="0" value="0" placeholder="0">
+              <div class="time-separator">:</div>
+              <input type="number" id="redSeconds" class="threshold-input-field" min="0" max="59" value="10" placeholder="0">
+              <span class="time-unit">秒</span>
+            </div>
+          </div>
         </div>
+        <p class="help-text">🟡 黃燈：介於紅燈與綠燈之間</p>
       </div>
       
       <div class="form-group">

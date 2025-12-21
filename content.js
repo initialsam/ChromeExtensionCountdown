@@ -4,11 +4,15 @@ let timerIndicator = null;
 let fullscreenAlert = null;
 let showTime = true;
 let autoStarted = false; // 防止重複自動啟動
+let greenThreshold = 180; // 綠燈門檻（預設3分鐘）
+let redThreshold = 10; // 紅燈門檻（預設10秒）
 
 // 接收來自 popup 的訊息
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'startTimer') {
     showTime = request.showTime !== undefined ? request.showTime : true;
+    greenThreshold = request.greenThreshold !== undefined ? request.greenThreshold : 180;
+    redThreshold = request.redThreshold !== undefined ? request.redThreshold : 10;
     startCountdown(request.seconds);
     sendResponse({ success: true });
   } else if (request.action === 'stopTimer') {
@@ -22,15 +26,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 function checkAutoStart() {
   if (autoStarted || timerInterval) return; // 已經啟動或正在計時中
   
-  chrome.storage.local.get(['siteRules'], (result) => {
+  chrome.storage.local.get(['siteRules', 'greenThreshold', 'redThreshold'], (result) => {
     const rules = result.siteRules || [];
     const currentUrl = window.location.href;
+    
+    // 載入全域燈號門檻設定作為預設值
+    const defaultGreenThreshold = result.greenThreshold !== undefined ? result.greenThreshold : 180;
+    const defaultRedThreshold = result.redThreshold !== undefined ? result.redThreshold : 10;
     
     for (const rule of rules) {
       if (matchPattern(currentUrl, rule.urlPattern)) {
         autoStarted = true;
         // 使用規則中的 showTime 設定，預設為 true
         showTime = rule.showTime !== undefined ? rule.showTime : true;
+        
+        // 使用規則中的燈號設定，若無則使用全域設定
+        greenThreshold = rule.greenThreshold !== undefined ? rule.greenThreshold : defaultGreenThreshold;
+        redThreshold = rule.redThreshold !== undefined ? rule.redThreshold : defaultRedThreshold;
         
         // 啟動計時器（網頁右下角指示器）
         startCountdown(rule.seconds);
@@ -153,15 +165,15 @@ function updateTimerDisplay() {
   }
   
   if (lightElement) {
-    // 3分鐘以上：綠燈
-    if (remainingSeconds > 180) {
+    // 綠燈：剩餘時間大於綠燈門檻
+    if (remainingSeconds > greenThreshold) {
       lightElement.className = 'timer-light green';
     }
-    // 10秒以內：紅燈
-    else if (remainingSeconds <= 10 && remainingSeconds > 0) {
+    // 紅燈：剩餘時間小於等於紅燈門檻
+    else if (remainingSeconds <= redThreshold && remainingSeconds > 0) {
       lightElement.className = 'timer-light red';
     }
-    // 3分鐘以內（但大於10秒）：黃燈
+    // 黃燈：介於綠燈與紅燈之間
     else if (remainingSeconds > 0) {
       lightElement.className = 'timer-light yellow';
     }
@@ -238,9 +250,11 @@ function showFullscreenAlert() {
   
   // 重新計時按鈕
   fullscreenAlert.querySelector('.restart-btn').addEventListener('click', () => {
-    chrome.storage.local.get(['lastSetTime', 'showTime', 'showBadge'], (result) => {
+    chrome.storage.local.get(['lastSetTime', 'showTime', 'showBadge', 'greenThreshold', 'redThreshold'], (result) => {
       if (result.lastSetTime) {
         showTime = result.showTime !== undefined ? result.showTime : true;
+        greenThreshold = result.greenThreshold !== undefined ? result.greenThreshold : 180;
+        redThreshold = result.redThreshold !== undefined ? result.redThreshold : 10;
         fullscreenAlert.remove();
         fullscreenAlert = null;
         startCountdown(result.lastSetTime);
@@ -249,7 +263,9 @@ function showFullscreenAlert() {
         chrome.runtime.sendMessage({
           action: 'startBadgeTimer',
           seconds: result.lastSetTime,
-          showBadge: result.showBadge !== undefined ? result.showBadge : true
+          showBadge: result.showBadge !== undefined ? result.showBadge : true,
+          greenThreshold: greenThreshold,
+          redThreshold: redThreshold
         }, (response) => {
           if (chrome.runtime.lastError) {
             console.log('Background message error:', chrome.runtime.lastError.message);

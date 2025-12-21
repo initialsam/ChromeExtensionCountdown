@@ -1,11 +1,25 @@
 let badgeTimerInterval = null;
 let badgeRemainingSeconds = 0;
 let showBadge = true;
+let greenThreshold = 180; // 綠燈門檻（預設3分鐘）
+let redThreshold = 10; // 紅燈門檻（預設10秒）
+
+// 初始化時載入設定
+chrome.storage.local.get(['greenThreshold', 'redThreshold'], (result) => {
+  if (result.greenThreshold !== undefined) {
+    greenThreshold = result.greenThreshold;
+  }
+  if (result.redThreshold !== undefined) {
+    redThreshold = result.redThreshold;
+  }
+});
 
 // 監聽來自 popup 的訊息
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'startBadgeTimer') {
     showBadge = request.showBadge !== undefined ? request.showBadge : true;
+    greenThreshold = request.greenThreshold !== undefined ? request.greenThreshold : 180;
+    redThreshold = request.redThreshold !== undefined ? request.redThreshold : 10;
     startBadgeTimer(request.seconds);
     sendResponse({ success: true });
   } else if (request.action === 'stopBadgeTimer') {
@@ -23,21 +37,32 @@ function startBadgeTimer(seconds) {
   stopBadgeTimer();
   
   badgeRemainingSeconds = seconds;
-  updateBadge();
   
-  badgeTimerInterval = setInterval(() => {
-    badgeRemainingSeconds--;
+  // 先從 storage 載入最新的設定，確保使用正確的門檻值
+  chrome.storage.local.get(['greenThreshold', 'redThreshold'], (result) => {
+    if (result.greenThreshold !== undefined) {
+      greenThreshold = result.greenThreshold;
+    }
+    if (result.redThreshold !== undefined) {
+      redThreshold = result.redThreshold;
+    }
+    
     updateBadge();
     
-    if (badgeRemainingSeconds <= 0) {
-      clearInterval(badgeTimerInterval);
-      badgeTimerInterval = null;
+    badgeTimerInterval = setInterval(() => {
+      badgeRemainingSeconds--;
+      updateBadge();
       
-      // 時間到，顯示紅色背景
-      chrome.action.setBadgeBackgroundColor({ color: '#EF4444' });
-      chrome.action.setBadgeText({ text: '0' });
-    }
-  }, 1000);
+      if (badgeRemainingSeconds <= 0) {
+        clearInterval(badgeTimerInterval);
+        badgeTimerInterval = null;
+        
+        // 時間到，顯示紅色背景
+        chrome.action.setBadgeBackgroundColor({ color: '#EF4444' });
+        chrome.action.setBadgeText({ text: '0' });
+      }
+    }, 1000);
+  });
 }
 
 // 停止 Badge 倒數計時
@@ -61,14 +86,14 @@ function updateBadge() {
   
   if (badgeRemainingSeconds > 0) {
     // 根據剩餘時間設定顏色
-    if (badgeRemainingSeconds > 180) {
-      // 3分鐘以上：綠色
+    if (badgeRemainingSeconds > greenThreshold) {
+      // 大於綠燈門檻：綠色
       chrome.action.setBadgeBackgroundColor({ color: '#22C55E' });
-    } else if (badgeRemainingSeconds > 10) {
-      // 3分鐘以內但大於10秒：黃色
+    } else if (badgeRemainingSeconds > redThreshold) {
+      // 介於紅燈與綠燈之間：黃色
       chrome.action.setBadgeBackgroundColor({ color: '#EAB308' });
     } else {
-      // 10秒以內：紅色
+      // 小於等於紅燈門檻：紅色
       chrome.action.setBadgeBackgroundColor({ color: '#EF4444' });
     }
     
