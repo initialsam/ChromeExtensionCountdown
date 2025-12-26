@@ -158,6 +158,20 @@
     .btn-delete:hover {
       background: #dc2626;
     }
+    .btn-edit {
+      background: #f59e0b;
+      color: white;
+      padding: 8px 16px;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+    .btn-edit:hover {
+      background: #d97706;
+    }
+    .rule-actions {
+      display: flex;
+      gap: 8px;
+    }
     .rules-list {
       margin-top: 20px;
     }
@@ -266,6 +280,7 @@
       </div>
       
       <button class="btn btn-primary" id="addRuleBtn">➕ 新增規則</button>
+      <button class="btn btn-primary" id="cancelEditBtn" style="display: none; background: #6b7280; margin-top: 8px;">✖ 取消編輯</button>
     </div>
     
     <h2 style="margin-bottom: 12px; font-size: 18px; color: #333;">已設定的規則</h2>
@@ -275,6 +290,22 @@
         <p>尚未設定任何規則</p>
         <p style="margin-top: 10px; font-size: 14px;">在上方新增您的第一條規則</p>
       </div>
+    </div>
+
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+      <h2 style="margin-bottom: 12px; font-size: 18px; color: #333;">⚙️ 設定檔管理</h2>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" id="exportBtn" style="flex: 1; background: #10b981; color: white;">
+          📤 匯出設定
+        </button>
+        <button class="btn" id="importBtn" style="flex: 1; background: #3b82f6; color: white;">
+          📥 匯入設定
+        </button>
+      </div>
+      <input type="file" id="importFile" accept=".json" style="display: none">
+      <p class="help-text" style="margin-top: 8px; text-align: center;">
+        備份或還原所有設定（包含網站規則、燈號設定等）
+      </p>
     </div>
   </div>
   

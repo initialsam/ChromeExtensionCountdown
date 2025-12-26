@@ -104,4 +104,62 @@ function updateBadge() {
 // 監聽擴展安裝或更新
 chrome.runtime.onInstalled.addListener(() => {
   chrome.action.setBadgeText({ text: '' });
+  
+  // 建立右鍵選單
+  chrome.contextMenus.create({
+    id: 'addSiteRule',
+    title: '新增此網站到倒數計時規則',
+    contexts: ['page', 'frame']
+  });
+});
+
+// 監聽右鍵選單點擊
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === 'addSiteRule') {
+    // 取得當前網址
+    const url = new URL(tab.url);
+    const urlPattern = `*${url.hostname}*`;
+    
+    // 取得預設設定
+    chrome.storage.local.get(['lastSetTime', 'greenThreshold', 'redThreshold', 'siteRules'], (result) => {
+      const defaultTime = result.lastSetTime || 600; // 預設10分鐘
+      const greenThreshold = result.greenThreshold !== undefined ? result.greenThreshold : 180;
+      const redThreshold = result.redThreshold !== undefined ? result.redThreshold : 10;
+      const rules = result.siteRules || [];
+      
+      // 檢查是否已存在
+      const existingIndex = rules.findIndex(rule => rule.urlPattern === urlPattern);
+      
+      if (existingIndex >= 0) {
+        // 已存在，更新規則
+        rules[existingIndex] = {
+          urlPattern: urlPattern,
+          seconds: defaultTime,
+          showTime: true,
+          greenThreshold: greenThreshold,
+          redThreshold: redThreshold
+        };
+      } else {
+        // 新增規則
+        rules.push({
+          urlPattern: urlPattern,
+          seconds: defaultTime,
+          showTime: true,
+          greenThreshold: greenThreshold,
+          redThreshold: redThreshold
+        });
+      }
+      
+      // 儲存規則
+      chrome.storage.local.set({ siteRules: rules }, () => {
+        // 顯示通知
+        chrome.notifications.create({
+          type: 'basic',
+          iconUrl: 'icons/icon48.png',
+          title: '倒數計時規則',
+          message: `已新增規則：${urlPattern}\n倒數時間：${Math.floor(defaultTime / 60)}分${defaultTime % 60}秒`
+        });
+      });
+    });
+  }
 });
