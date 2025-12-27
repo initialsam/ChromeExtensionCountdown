@@ -154,7 +154,7 @@
 - 自動語言偵測
 - 手動語言切換
 
-詳細說明：[語言切換指南](LANGUAGE_SWITCHING_GUIDE.md)
+詳細說明：[語言切換指南](docs/LANGUAGE_SWITCHING_GUIDE.md)
 
 ---
 

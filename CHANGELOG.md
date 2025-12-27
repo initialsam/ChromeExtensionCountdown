@@ -63,14 +63,14 @@
 - **覆蓋範圍**：100% 所有界面文字
 
 ### 📝 文件
-- 新增 `I18N_README.md` - 國際化總覽
-- 新增 `I18N_SUMMARY.md` - 實作總結
-- 新增 `LANGUAGE_FIX.md` - 語言切換修正說明
-- 新增 `LANGUAGE_SWITCHING_GUIDE.md` - 使用者指南
-- 新增 `CONTEXT_MENU_I18N.md` - 右鍵選單國際化
-- 新增 `CONTEXT_MENU_DYNAMIC_UPDATE.md` - 動態更新說明
-- 新增 `FINAL_I18N_SUMMARY.md` - 最終總結
-- 新增 `RELEASE_NOTES_1.1.0.md` - 版本更新說明
+- 新增 `docs/I18N_README.md` - 國際化總覽
+- 新增 `docs/I18N_SUMMARY.md` - 實作總結
+- 新增 `docs/LANGUAGE_FIX.md` - 語言切換修正說明
+- 新增 `docs/LANGUAGE_SWITCHING_GUIDE.md` - 使用者指南
+- 新增 `docs/CONTEXT_MENU_I18N.md` - 右鍵選單國際化
+- 新增 `docs/CONTEXT_MENU_DYNAMIC_UPDATE.md` - 動態更新說明
+- 新增 `docs/FINAL_I18N_SUMMARY.md` - 最終總結
+- 新增 `docs/RELEASE_NOTES_1.1.0.md` - 版本更新說明
 
 ### 🐛 修正
 - 修正語言切換無法生效的問題
