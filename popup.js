@@ -49,7 +49,7 @@ startBtn.addEventListener('click', () => {
   totalSeconds = minutes * 60 + seconds;
   
   if (totalSeconds <= 0) {
-    status.textContent = '請先設定時間！';
+    status.textContent = I18N.getMessage('pleaseSetTime');
     status.style.color = '#fca5a5';
     setTimeout(() => {
       status.textContent = '';
@@ -99,7 +99,7 @@ startBtn.addEventListener('click', () => {
         }
       });
       
-      status.textContent = '計時已開始！';
+      status.textContent = I18N.getMessage('timerStarted');
       status.style.color = '#86efac';
       
       setTimeout(() => {
@@ -114,7 +114,7 @@ resetBtn.addEventListener('click', () => {
   minutesInput.value = '0';
   secondsInput.value = '0';
   totalSeconds = 0;
-  status.textContent = '已清除時間';
+  status.textContent = I18N.getMessage('timeCleared');
   status.style.color = '#fca5a5';
   setTimeout(() => {
     status.textContent = '';

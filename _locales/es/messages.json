@@ -1,0 +1,170 @@
+{
+  "extensionName": {
+    "message": "Temporizador de cuenta regresiva"
+  },
+  "extensionDescription": {
+    "message": "Temporizador personalizable con alertas visuales"
+  },
+  "title": {
+    "message": "Cuenta regresiva"
+  },
+  "displaySettings": {
+    "message": "Configuración de visualización"
+  },
+  "showTime": {
+    "message": "Mostrar tiempo de cuenta regresiva"
+  },
+  "showBadge": {
+    "message": "Mostrar cuenta regresiva en el ícono de extensión (minutos)"
+  },
+  "lightSettings": {
+    "message": "Configuración de luces"
+  },
+  "greenLight": {
+    "message": "🟢 Verde >"
+  },
+  "redLight": {
+    "message": "🔴 Rojo ≤"
+  },
+  "yellowLightInfo": {
+    "message": "🟡 Amarillo: Entre rojo y verde"
+  },
+  "seconds": {
+    "message": "seg"
+  },
+  "siteAutoTimer": {
+    "message": "Temporizador automático de sitio"
+  },
+  "manageSiteRules": {
+    "message": "Gestionar reglas de sitio"
+  },
+  "start": {
+    "message": "Iniciar"
+  },
+  "clear": {
+    "message": "Borrar"
+  },
+  "pleaseSetTime": {
+    "message": "¡Por favor, establece un tiempo primero!"
+  },
+  "timerStarted": {
+    "message": "¡Temporizador iniciado!"
+  },
+  "timeCleared": {
+    "message": "Tiempo borrado"
+  },
+  "siteRulesTitle": {
+    "message": "⏰ Reglas de temporizador automático"
+  },
+  "siteRulesSubtitle": {
+    "message": "Iniciar automáticamente la cuenta regresiva en sitios específicos"
+  },
+  "urlPattern": {
+    "message": "URL del sitio web (admite comodín *)"
+  },
+  "urlPatternHelp": {
+    "message": "Use * para cualquier carácter, ej. *facebook.com* coincide con todas las páginas de Facebook"
+  },
+  "countdown": {
+    "message": "⏱️ Cuenta regresiva"
+  },
+  "showTimeOption": {
+    "message": "Mostrar tiempo de cuenta regresiva (desmarcar para mostrar solo luz)"
+  },
+  "addRule": {
+    "message": "➕ Agregar regla"
+  },
+  "cancelEdit": {
+    "message": "✖ Cancelar edición"
+  },
+  "existingRules": {
+    "message": "Reglas existentes"
+  },
+  "noRules": {
+    "message": "Aún no hay reglas establecidas"
+  },
+  "addFirstRule": {
+    "message": "Agrega tu primera regla arriba"
+  },
+  "edit": {
+    "message": "Editar"
+  },
+  "delete": {
+    "message": "Eliminar"
+  },
+  "enterUrl": {
+    "message": "¡Por favor, ingresa una URL de sitio web!"
+  },
+  "enterValidTime": {
+    "message": "¡Por favor, establece un tiempo mayor a 0!"
+  },
+  "ruleExists": {
+    "message": "Esta URL ya tiene una regla. ¿Actualizarla?"
+  },
+  "added": {
+    "message": "✓ ¡Agregado!"
+  },
+  "updated": {
+    "message": "✓ ¡Actualizado!"
+  },
+  "saveChanges": {
+    "message": "💾 Guardar cambios"
+  },
+  "confirmDelete": {
+    "message": "¿Estás seguro de que quieres eliminar esta regla?"
+  },
+  "settingsManagement": {
+    "message": "⚙️ Gestión de configuración"
+  },
+  "exportSettings": {
+    "message": "📤 Exportar configuración"
+  },
+  "importSettings": {
+    "message": "📥 Importar configuración"
+  },
+  "settingsHelp": {
+    "message": "Hacer copia de seguridad o restaurar toda la configuración (reglas de sitio, configuración de luces, etc.)"
+  },
+  "exported": {
+    "message": "✓ ¡Exportado!"
+  },
+  "imported": {
+    "message": "✓ ¡Importado!"
+  },
+  "importFailed": {
+    "message": "Error al importar: "
+  },
+  "minutes": {
+    "message": "minutos"
+  },
+  "minute": {
+    "message": "minuto"
+  },
+  "lightOnly": {
+    "message": "Solo luz"
+  },
+  "language": {
+    "message": "Idioma"
+  },
+  "languageSettings": {
+    "message": "🌐 Configuración de idioma"
+  },
+  "languageHelp": {
+    "message": "Seleccionar idioma de la interfaz (requiere recargar la página)"
+  },
+  "contextMenuAddSite": {
+    "message": "Agregar este sitio a las reglas de cuenta regresiva"
+  },
+  "notificationTitle": {
+    "message": "Regla de temporizador"
+  },
+  "notificationAdded": {
+    "message": "Regla agregada: $1\nCuenta regresiva: $2"
+  },
+  "ruleAlreadyExists": {
+    "message": "La regla ya existe"
+  },
+  "ruleAlreadyExistsMessage": {
+    "message": "La regla para $1 ya existe.\nPor favor, administre las reglas en la página de configuración."
+  }
+}

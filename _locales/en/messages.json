@@ -1,0 +1,170 @@
+{
+  "extensionName": {
+    "message": "Countdown Timer"
+  },
+  "extensionDescription": {
+    "message": "Customizable countdown timer with visual alerts"
+  },
+  "title": {
+    "message": "Countdown Timer"
+  },
+  "displaySettings": {
+    "message": "Display Settings"
+  },
+  "showTime": {
+    "message": "Show countdown time"
+  },
+  "showBadge": {
+    "message": "Show countdown on extension icon (minutes)"
+  },
+  "lightSettings": {
+    "message": "Light Settings"
+  },
+  "greenLight": {
+    "message": "🟢 Green >"
+  },
+  "redLight": {
+    "message": "🔴 Red ≤"
+  },
+  "yellowLightInfo": {
+    "message": "🟡 Yellow: Between red and green"
+  },
+  "seconds": {
+    "message": "sec"
+  },
+  "siteAutoTimer": {
+    "message": "Site Auto Timer"
+  },
+  "manageSiteRules": {
+    "message": "Manage Site Rules"
+  },
+  "start": {
+    "message": "Start"
+  },
+  "clear": {
+    "message": "Clear"
+  },
+  "pleaseSetTime": {
+    "message": "Please set a time first!"
+  },
+  "timerStarted": {
+    "message": "Timer started!"
+  },
+  "timeCleared": {
+    "message": "Time cleared"
+  },
+  "siteRulesTitle": {
+    "message": "⏰ Site Auto Timer Rules"
+  },
+  "siteRulesSubtitle": {
+    "message": "Automatically start countdown on specific websites"
+  },
+  "urlPattern": {
+    "message": "Website URL (supports wildcard *)"
+  },
+  "urlPatternHelp": {
+    "message": "Use * for any characters, e.g., *facebook.com* matches all Facebook pages"
+  },
+  "countdown": {
+    "message": "⏱️ Countdown"
+  },
+  "showTimeOption": {
+    "message": "Show countdown time (uncheck to show light only)"
+  },
+  "addRule": {
+    "message": "➕ Add Rule"
+  },
+  "cancelEdit": {
+    "message": "✖ Cancel Edit"
+  },
+  "existingRules": {
+    "message": "Existing Rules"
+  },
+  "noRules": {
+    "message": "No rules set yet"
+  },
+  "addFirstRule": {
+    "message": "Add your first rule above"
+  },
+  "edit": {
+    "message": "Edit"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "enterUrl": {
+    "message": "Please enter a website URL!"
+  },
+  "enterValidTime": {
+    "message": "Please set a time greater than 0!"
+  },
+  "ruleExists": {
+    "message": "This URL already has a rule. Update it?"
+  },
+  "added": {
+    "message": "✓ Added!"
+  },
+  "updated": {
+    "message": "✓ Updated!"
+  },
+  "saveChanges": {
+    "message": "💾 Save Changes"
+  },
+  "confirmDelete": {
+    "message": "Are you sure you want to delete this rule?"
+  },
+  "settingsManagement": {
+    "message": "⚙️ Settings Management"
+  },
+  "exportSettings": {
+    "message": "📤 Export Settings"
+  },
+  "importSettings": {
+    "message": "📥 Import Settings"
+  },
+  "settingsHelp": {
+    "message": "Backup or restore all settings (including site rules, light settings, etc.)"
+  },
+  "exported": {
+    "message": "✓ Exported!"
+  },
+  "imported": {
+    "message": "✓ Imported!"
+  },
+  "importFailed": {
+    "message": "Import failed: "
+  },
+  "minutes": {
+    "message": "minutes"
+  },
+  "minute": {
+    "message": "minute"
+  },
+  "lightOnly": {
+    "message": "Light only"
+  },
+  "language": {
+    "message": "Language"
+  },
+  "languageSettings": {
+    "message": "🌐 Language Settings"
+  },
+  "languageHelp": {
+    "message": "Select interface language (requires page reload)"
+  },
+  "contextMenuAddSite": {
+    "message": "Add this site to countdown rules"
+  },
+  "notificationTitle": {
+    "message": "Countdown Timer Rule"
+  },
+  "notificationAdded": {
+    "message": "Rule added: $1\nCountdown: $2"
+  },
+  "ruleAlreadyExists": {
+    "message": "Rule Already Exists"
+  },
+  "ruleAlreadyExistsMessage": {
+    "message": "Rule for $1 already exists.\nPlease manage rules in the settings page."
+  }
+}

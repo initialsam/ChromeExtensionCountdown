@@ -1,0 +1,170 @@
+{
+  "extensionName": {
+    "message": "Compte à rebours"
+  },
+  "extensionDescription": {
+    "message": "Minuteur personnalisable avec alertes visuelles"
+  },
+  "title": {
+    "message": "Compte à rebours"
+  },
+  "displaySettings": {
+    "message": "Paramètres d'affichage"
+  },
+  "showTime": {
+    "message": "Afficher le temps du compte à rebours"
+  },
+  "showBadge": {
+    "message": "Afficher le compte à rebours sur l'icône de l'extension (minutes)"
+  },
+  "lightSettings": {
+    "message": "Paramètres des feux"
+  },
+  "greenLight": {
+    "message": "🟢 Vert >"
+  },
+  "redLight": {
+    "message": "🔴 Rouge ≤"
+  },
+  "yellowLightInfo": {
+    "message": "🟡 Jaune : Entre rouge et vert"
+  },
+  "seconds": {
+    "message": "sec"
+  },
+  "siteAutoTimer": {
+    "message": "Minuteur automatique de site"
+  },
+  "manageSiteRules": {
+    "message": "Gérer les règles de site"
+  },
+  "start": {
+    "message": "Démarrer"
+  },
+  "clear": {
+    "message": "Effacer"
+  },
+  "pleaseSetTime": {
+    "message": "Veuillez d'abord définir une durée !"
+  },
+  "timerStarted": {
+    "message": "Minuteur démarré !"
+  },
+  "timeCleared": {
+    "message": "Temps effacé"
+  },
+  "siteRulesTitle": {
+    "message": "⏰ Règles de minuteur automatique"
+  },
+  "siteRulesSubtitle": {
+    "message": "Démarrer automatiquement le compte à rebours sur des sites spécifiques"
+  },
+  "urlPattern": {
+    "message": "URL du site Web (prend en charge le joker *)"
+  },
+  "urlPatternHelp": {
+    "message": "Utilisez * pour n'importe quel caractère, par ex. *facebook.com* correspond à toutes les pages Facebook"
+  },
+  "countdown": {
+    "message": "⏱️ Compte à rebours"
+  },
+  "showTimeOption": {
+    "message": "Afficher le temps du compte à rebours (décocher pour afficher uniquement le feu)"
+  },
+  "addRule": {
+    "message": "➕ Ajouter une règle"
+  },
+  "cancelEdit": {
+    "message": "✖ Annuler la modification"
+  },
+  "existingRules": {
+    "message": "Règles existantes"
+  },
+  "noRules": {
+    "message": "Aucune règle définie pour le moment"
+  },
+  "addFirstRule": {
+    "message": "Ajoutez votre première règle ci-dessus"
+  },
+  "edit": {
+    "message": "Modifier"
+  },
+  "delete": {
+    "message": "Supprimer"
+  },
+  "enterUrl": {
+    "message": "Veuillez entrer une URL de site Web !"
+  },
+  "enterValidTime": {
+    "message": "Veuillez définir un temps supérieur à 0 !"
+  },
+  "ruleExists": {
+    "message": "Cette URL a déjà une règle. La mettre à jour ?"
+  },
+  "added": {
+    "message": "✓ Ajouté !"
+  },
+  "updated": {
+    "message": "✓ Mis à jour !"
+  },
+  "saveChanges": {
+    "message": "💾 Enregistrer les modifications"
+  },
+  "confirmDelete": {
+    "message": "Êtes-vous sûr de vouloir supprimer cette règle ?"
+  },
+  "settingsManagement": {
+    "message": "⚙️ Gestion des paramètres"
+  },
+  "exportSettings": {
+    "message": "📤 Exporter les paramètres"
+  },
+  "importSettings": {
+    "message": "📥 Importer les paramètres"
+  },
+  "settingsHelp": {
+    "message": "Sauvegarder ou restaurer tous les paramètres (règles de site, paramètres des feux, etc.)"
+  },
+  "exported": {
+    "message": "✓ Exporté !"
+  },
+  "imported": {
+    "message": "✓ Importé !"
+  },
+  "importFailed": {
+    "message": "Échec de l'importation : "
+  },
+  "minutes": {
+    "message": "minutes"
+  },
+  "minute": {
+    "message": "minute"
+  },
+  "lightOnly": {
+    "message": "Feu uniquement"
+  },
+  "language": {
+    "message": "Langue"
+  },
+  "languageSettings": {
+    "message": "🌐 Paramètres de langue"
+  },
+  "languageHelp": {
+    "message": "Sélectionnez la langue de l'interface (nécessite un rechargement de la page)"
+  },
+  "contextMenuAddSite": {
+    "message": "Ajouter ce site aux règles de compte à rebours"
+  },
+  "notificationTitle": {
+    "message": "Règle de compte à rebours"
+  },
+  "notificationAdded": {
+    "message": "Règle ajoutée : $1\nCompte à rebours : $2"
+  },
+  "ruleAlreadyExists": {
+    "message": "La règle existe déjà"
+  },
+  "ruleAlreadyExistsMessage": {
+    "message": "La règle pour $1 existe déjà.\nVeuillez gérer les règles dans la page des paramètres."
+  }
+}

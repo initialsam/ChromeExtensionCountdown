@@ -1,0 +1,170 @@
+{
+  "extensionName": {
+    "message": "倒數計時"
+  },
+  "extensionDescription": {
+    "message": "可自訂時間的倒數計時器，附有視覺提醒功能"
+  },
+  "title": {
+    "message": "倒數計時"
+  },
+  "displaySettings": {
+    "message": "顯示設定"
+  },
+  "showTime": {
+    "message": "顯示倒數時間"
+  },
+  "showBadge": {
+    "message": "在擴展圖標顯示倒數（分鐘）"
+  },
+  "lightSettings": {
+    "message": "燈號設定"
+  },
+  "greenLight": {
+    "message": "🟢 綠燈 >"
+  },
+  "redLight": {
+    "message": "🔴 紅燈 ≤"
+  },
+  "yellowLightInfo": {
+    "message": "🟡 黃燈：介於紅燈與綠燈之間"
+  },
+  "seconds": {
+    "message": "秒"
+  },
+  "siteAutoTimer": {
+    "message": "網站自動計時"
+  },
+  "manageSiteRules": {
+    "message": "管理網站規則"
+  },
+  "start": {
+    "message": "開始"
+  },
+  "clear": {
+    "message": "清除"
+  },
+  "pleaseSetTime": {
+    "message": "請先設定時間！"
+  },
+  "timerStarted": {
+    "message": "計時已開始！"
+  },
+  "timeCleared": {
+    "message": "已清除時間"
+  },
+  "siteRulesTitle": {
+    "message": "⏰ 網站自動計時規則"
+  },
+  "siteRulesSubtitle": {
+    "message": "設定特定網站自動開始倒數計時"
+  },
+  "urlPattern": {
+    "message": "網站網址（支援萬用字元 *）"
+  },
+  "urlPatternHelp": {
+    "message": "使用 * 代表任意字元，例如：*facebook.com* 會匹配所有 Facebook 頁面"
+  },
+  "countdown": {
+    "message": "⏱️ 倒數"
+  },
+  "showTimeOption": {
+    "message": "顯示倒數時間（取消勾選只顯示訊號燈）"
+  },
+  "addRule": {
+    "message": "➕ 新增規則"
+  },
+  "cancelEdit": {
+    "message": "✖ 取消編輯"
+  },
+  "existingRules": {
+    "message": "已設定的規則"
+  },
+  "noRules": {
+    "message": "尚未設定任何規則"
+  },
+  "addFirstRule": {
+    "message": "在上方新增您的第一條規則"
+  },
+  "edit": {
+    "message": "編輯"
+  },
+  "delete": {
+    "message": "刪除"
+  },
+  "enterUrl": {
+    "message": "請輸入網站網址！"
+  },
+  "enterValidTime": {
+    "message": "請設定大於 0 的時間！"
+  },
+  "ruleExists": {
+    "message": "此網址已存在規則，是否要更新？"
+  },
+  "added": {
+    "message": "✓ 已新增！"
+  },
+  "updated": {
+    "message": "✓ 已更新！"
+  },
+  "saveChanges": {
+    "message": "💾 儲存修改"
+  },
+  "confirmDelete": {
+    "message": "確定要刪除此規則嗎？"
+  },
+  "settingsManagement": {
+    "message": "⚙️ 設定檔管理"
+  },
+  "exportSettings": {
+    "message": "📤 匯出設定"
+  },
+  "importSettings": {
+    "message": "📥 匯入設定"
+  },
+  "settingsHelp": {
+    "message": "備份或還原所有設定（包含網站規則、燈號設定等）"
+  },
+  "exported": {
+    "message": "✓ 已匯出！"
+  },
+  "imported": {
+    "message": "✓ 已匯入！"
+  },
+  "importFailed": {
+    "message": "匯入失敗："
+  },
+  "minutes": {
+    "message": "分鐘"
+  },
+  "minute": {
+    "message": "分鐘"
+  },
+  "lightOnly": {
+    "message": "僅訊號燈"
+  },
+  "language": {
+    "message": "語言"
+  },
+  "languageSettings": {
+    "message": "🌐 語言設定"
+  },
+  "languageHelp": {
+    "message": "選擇介面語言（需重新載入頁面）"
+  },
+  "contextMenuAddSite": {
+    "message": "新增此網站到倒數計時規則"
+  },
+  "notificationTitle": {
+    "message": "倒數計時規則"
+  },
+  "notificationAdded": {
+    "message": "已新增規則：$1\n倒數時間：$2"
+  },
+  "ruleAlreadyExists": {
+    "message": "規則已存在"
+  },
+  "ruleAlreadyExistsMessage": {
+    "message": "$1 的規則已經存在。\n請到設定頁面管理規則。"
+  }
+}

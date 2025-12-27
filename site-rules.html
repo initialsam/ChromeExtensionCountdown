@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>網站自動計時規則</title>
+  <title data-i18n="siteRulesTitle">網站自動計時規則</title>
   <style>
     * {
       margin: 0;
@@ -224,66 +224,66 @@
 </head>
 <body>
   <div class="container">
-    <h1>⏰ 網站自動計時規則</h1>
-    <p class="subtitle">設定特定網站自動開始倒數計時</p>
+    <h1><span data-i18n="siteRulesTitle">⏰ 網站自動計時規則</span></h1>
+    <p class="subtitle" data-i18n="siteRulesSubtitle">設定特定網站自動開始倒數計時</p>
     
     <div class="add-section">
       <div class="form-group">
-        <label for="urlPattern">網站網址（支援萬用字元 *）</label>
-        <input type="text" id="urlPattern" placeholder="例如：*facebook.com* 或 *youtube.com*">
-        <p class="help-text">使用 * 代表任意字元，例如：*facebook.com* 會匹配所有 Facebook 頁面</p>
+        <label for="urlPattern" data-i18n="urlPattern">網站網址（支援萬用字元 *）</label>
+        <input type="text" id="urlPattern" data-i18n-placeholder="urlPattern">
+        <p class="help-text" data-i18n="urlPatternHelp">使用 * 代表任意字元，例如：*facebook.com* 會匹配所有 Facebook 頁面</p>
       </div>
       
       <div class="form-group">
         <div style="display: flex; align-items: center; gap: 8px;">
-          <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;">⏱️ 倒數</div>
+          <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;" data-i18n="countdown">⏱️ 倒數</div>
           <div class="time-input-row">
             <input type="number" id="minutes" class="time-input-field" min="0" value="10" placeholder="0">
             <div class="time-separator">:</div>
             <input type="number" id="seconds" class="time-input-field" min="0" max="59" value="0" placeholder="0">
-            <span class="time-unit">秒</span>
+            <span class="time-unit" data-i18n="seconds">秒</span>
           </div>
         </div>
       </div>
       
       <div class="form-group">
-        <label>燈號設定</label>
+        <label data-i18n="lightSettings">燈號設定</label>
         <div style="margin-bottom: 10px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-            <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;">🟢 綠燈 ></div>
+            <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;" data-i18n="greenLight">🟢 綠燈 ></div>
             <div class="time-input-row">
               <input type="number" id="greenMinutes" class="threshold-input-field" min="0" value="3" placeholder="0">
               <div class="time-separator">:</div>
               <input type="number" id="greenSeconds" class="threshold-input-field" min="0" max="59" value="0" placeholder="0">
-              <span class="time-unit">秒</span>
+              <span class="time-unit" data-i18n="seconds">秒</span>
             </div>
           </div>
           
           <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;">🔴 紅燈 ≤</div>
+            <div style="font-size: 13px; font-weight: 600; color: #666; width: 70px;" data-i18n="redLight">🔴 紅燈 ≤</div>
             <div class="time-input-row">
               <input type="number" id="redMinutes" class="threshold-input-field" min="0" value="0" placeholder="0">
               <div class="time-separator">:</div>
               <input type="number" id="redSeconds" class="threshold-input-field" min="0" max="59" value="10" placeholder="0">
-              <span class="time-unit">秒</span>
+              <span class="time-unit" data-i18n="seconds">秒</span>
             </div>
           </div>
         </div>
-        <p class="help-text">🟡 黃燈：介於紅燈與綠燈之間</p>
+        <p class="help-text" data-i18n="yellowLightInfo">🟡 黃燈：介於紅燈與綠燈之間</p>
       </div>
       
       <div class="form-group">
         <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
           <input type="checkbox" id="showTimeCheckbox" checked style="width: 20px; height: 20px; cursor: pointer;">
-          <span style="font-size: 14px; font-weight: normal;">顯示倒數時間（取消勾選只顯示訊號燈）</span>
+          <span style="font-size: 14px; font-weight: normal;" data-i18n="showTimeOption">顯示倒數時間（取消勾選只顯示訊號燈）</span>
         </label>
       </div>
       
-      <button class="btn btn-primary" id="addRuleBtn">➕ 新增規則</button>
-      <button class="btn btn-primary" id="cancelEditBtn" style="display: none; background: #6b7280; margin-top: 8px;">✖ 取消編輯</button>
+      <button class="btn btn-primary" id="addRuleBtn" data-i18n="addRule">➕ 新增規則</button>
+      <button class="btn btn-primary" id="cancelEditBtn" style="display: none; background: #6b7280; margin-top: 8px;" data-i18n="cancelEdit">✖ 取消編輯</button>
     </div>
     
-    <h2 style="margin-bottom: 12px; font-size: 18px; color: #333;">已設定的規則</h2>
+    <h2 style="margin-bottom: 12px; font-size: 18px; color: #333;" data-i18n="existingRules">已設定的規則</h2>
     <div class="rules-list" id="rulesList">
       <div class="empty-state">
         <div class="empty-state-icon">📝</div>
@@ -293,22 +293,38 @@
     </div>
 
     <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
-      <h2 style="margin-bottom: 12px; font-size: 18px; color: #333;">⚙️ 設定檔管理</h2>
+      <h2 style="margin-bottom: 12px; font-size: 18px; color: #333;" data-i18n="settingsManagement">⚙️ 設定檔管理</h2>
       <div style="display: flex; gap: 10px;">
-        <button class="btn" id="exportBtn" style="flex: 1; background: #10b981; color: white;">
+        <button class="btn" id="exportBtn" style="flex: 1; background: #10b981; color: white;" data-i18n="exportSettings">
           📤 匯出設定
         </button>
-        <button class="btn" id="importBtn" style="flex: 1; background: #3b82f6; color: white;">
+        <button class="btn" id="importBtn" style="flex: 1; background: #3b82f6; color: white;" data-i18n="importSettings">
           📥 匯入設定
         </button>
       </div>
       <input type="file" id="importFile" accept=".json" style="display: none">
-      <p class="help-text" style="margin-top: 8px; text-align: center;">
+      <p class="help-text" style="margin-top: 8px; text-align: center;" data-i18n="settingsHelp">
         備份或還原所有設定（包含網站規則、燈號設定等）
       </p>
     </div>
+
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e0e0e0;">
+      <h2 style="margin-bottom: 12px; font-size: 18px; color: #333;" data-i18n="languageSettings">🌐 語言設定</h2>
+      <div class="form-group">
+        <label for="languageSelect" data-i18n="language">語言</label>
+        <select id="languageSelect" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; cursor: pointer; transition: border 0.3s;">
+          <option value="en">English</option>
+          <option value="zh_TW">繁體中文</option>
+          <option value="ja">日本語</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+        </select>
+        <p class="help-text" style="margin-top: 8px;" data-i18n="languageHelp">選擇介面語言（需重新載入頁面）</p>
+      </div>
+    </div>
   </div>
   
+  <script src="i18n.js"></script>
   <script src="site-rules.js"></script>
 </body>
 </html>

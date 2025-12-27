@@ -26,8 +26,8 @@ function displayRules(rules) {
     rulesList.innerHTML = `
       <div class="empty-state">
         <div class="empty-state-icon">📝</div>
-        <p>尚未設定任何規則</p>
-        <p style="margin-top: 10px; font-size: 14px;">在上方新增您的第一條規則</p>
+        <p data-i18n="noRules">${I18N.getMessage('noRules')}</p>
+        <p style="margin-top: 10px; font-size: 14px;" data-i18n="addFirstRule">${I18N.getMessage('addFirstRule')}</p>
       </div>
     `;
     return;
@@ -36,22 +36,15 @@ function displayRules(rules) {
   rulesList.innerHTML = rules.map((rule, index) => {
     const minutes = Math.floor(rule.seconds / 60);
     const seconds = rule.seconds % 60;
-    const timeText = minutes > 0 
-      ? `${minutes} 分鐘 ${seconds} 秒` 
-      : `${seconds} 秒`;
+    const timeText = I18N.getTimeText(rule.seconds);
     
-    const displayText = rule.showTime !== false ? '顯示時間' : '僅訊號燈';
+    const displayText = rule.showTime !== false ? I18N.getMessage('showTime') : I18N.getMessage('lightOnly');
     
     // 處理燈號顯示
     const greenThreshold = rule.greenThreshold !== undefined ? rule.greenThreshold : 180;
     const redThreshold = rule.redThreshold !== undefined ? rule.redThreshold : 10;
-    const greenMin = Math.floor(greenThreshold / 60);
-    const greenSec = greenThreshold % 60;
-    const redMin = Math.floor(redThreshold / 60);
-    const redSec = redThreshold % 60;
-    
-    const greenText = greenMin > 0 ? `${greenMin}分${greenSec}秒` : `${greenSec}秒`;
-    const redText = redMin > 0 ? `${redMin}分${redSec}秒` : `${redSec}秒`;
+    const greenText = I18N.getTimeText(greenThreshold);
+    const redText = I18N.getTimeText(redThreshold);
     
     return `
       <div class="rule-item">
@@ -61,8 +54,8 @@ function displayRules(rules) {
           <div class="rule-time" style="font-size: 12px; margin-top: 2px">🟢 ${greenText} | 🔴 ${redText}</div>
         </div>
         <div class="rule-actions">
-          <button class="btn btn-edit" data-index="${index}">編輯</button>
-          <button class="btn btn-delete" data-index="${index}">刪除</button>
+          <button class="btn btn-edit" data-index="${index}" data-i18n="edit">${I18N.getMessage('edit')}</button>
+          <button class="btn btn-delete" data-index="${index}" data-i18n="delete">${I18N.getMessage('delete')}</button>
         </div>
       </div>
     `;
@@ -96,12 +89,12 @@ addRuleBtn.addEventListener('click', () => {
   const redThreshold = (parseInt(redMinutes.value) || 0) * 60 + (parseInt(redSeconds.value) || 0);
   
   if (!urlPattern) {
-    alert('請輸入網站網址！');
+    alert(I18N.getMessage('enterUrl'));
     return;
   }
   
   if (totalSeconds <= 0) {
-    alert('請設定大於 0 的時間！');
+    alert(I18N.getMessage('enterValidTime'));
     return;
   }
   
@@ -121,7 +114,7 @@ addRuleBtn.addEventListener('click', () => {
       // 新增模式：檢查是否已存在相同的規則
       const exists = rules.some(rule => rule.urlPattern === urlPattern);
       if (exists) {
-        if (!confirm('此網址已存在規則，是否要更新？')) {
+        if (!confirm(I18N.getMessage('ruleExists'))) {
           return;
         }
         // 移除舊規則
@@ -144,7 +137,7 @@ addRuleBtn.addEventListener('click', () => {
       
       // 視覺回饋
       const originalText = addRuleBtn.textContent;
-      const successText = editingIndex >= 0 ? '✓ 已更新！' : '✓ 已新增！';
+      const successText = editingIndex >= 0 ? I18N.getMessage('updated') : I18N.getMessage('added');
       addRuleBtn.textContent = successText;
       addRuleBtn.style.background = '#22c55e';
       setTimeout(() => {
@@ -173,7 +166,7 @@ function resetForm() {
   redMinutes.value = '0';
   redSeconds.value = '10';
   showTimeCheckbox.checked = true;
-  addRuleBtn.textContent = '➕ 新增規則';
+  addRuleBtn.textContent = I18N.getMessage('addRule');
   cancelEditBtn.style.display = 'none';
 }
 
@@ -203,7 +196,7 @@ function editRule(index, rules) {
   showTimeCheckbox.checked = rule.showTime !== false;
   
   // 更改按鈕文字
-  addRuleBtn.textContent = '💾 儲存修改';
+  addRuleBtn.textContent = I18N.getMessage('saveChanges');
   cancelEditBtn.style.display = 'block';
   
   // 捲動到表單頂部
@@ -212,7 +205,7 @@ function editRule(index, rules) {
 
 // 刪除規則
 function deleteRule(index) {
-  if (!confirm('確定要刪除此規則嗎？')) {
+  if (!confirm(I18N.getMessage('confirmDelete'))) {
     return;
   }
   
@@ -235,6 +228,24 @@ function escapeHtml(text) {
 
 // 頁面載入時顯示規則
 loadRules();
+
+// 語言選擇器初始化
+const languageSelect = document.getElementById('languageSelect');
+
+// 載入當前語言設定
+I18N.getEffectiveLocale().then((locale) => {
+  languageSelect.value = locale;
+});
+
+// 語言切換事件
+languageSelect.addEventListener('change', async (e) => {
+  const newLocale = e.target.value;
+  await I18N.setUserLocale(newLocale);
+  await I18N.setLocale(newLocale);
+  
+  // 重新載入規則列表以應用新語言
+  loadRules();
+});
 
 // 匯出設定
 document.getElementById('exportBtn').addEventListener('click', () => {
@@ -260,7 +271,7 @@ document.getElementById('exportBtn').addEventListener('click', () => {
     // 視覺回饋
     const exportBtn = document.getElementById('exportBtn');
     const originalText = exportBtn.textContent;
-    exportBtn.textContent = '✓ 已匯出！';
+    exportBtn.textContent = I18N.getMessage('exported');
     exportBtn.style.background = '#22c55e';
     setTimeout(() => {
       exportBtn.textContent = originalText;
@@ -302,7 +313,7 @@ document.getElementById('importFile').addEventListener('change', (e) => {
         // 視覺回饋
         const importBtn = document.getElementById('importBtn');
         const originalText = importBtn.textContent;
-        importBtn.textContent = '✓ 已匯入！';
+        importBtn.textContent = I18N.getMessage('imported');
         importBtn.style.background = '#22c55e';
         setTimeout(() => {
           importBtn.textContent = originalText;
@@ -310,7 +321,7 @@ document.getElementById('importFile').addEventListener('change', (e) => {
         }, 2000);
       });
     } catch (error) {
-      alert('匯入失敗：' + error.message);
+      alert(I18N.getMessage('importFailed') + error.message);
     }
   };
   
